@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -14,7 +15,9 @@
     <div class="container">
         <div class="formu">
             <form action="">
-                <input type="text" placeholder="Añadir Tarea...">
+                <input type="text" class="task-input" placeholder="Añadir Tarea...">
+                <br>
+                <input type="text" class="description-input" placeholder="Descripción de la Tarea">
                 <button class="btn-add">+</button>
             </form>
         </div>
@@ -28,5 +31,9 @@
         </div>
     </div>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script src="main.js"></script>
 </body>
 </html>
