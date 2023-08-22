@@ -3,7 +3,6 @@ const descriptionInput = document.querySelector('.description-input')
 const btnAdd = document.querySelector('.btn-add').addEventListener("click", async e =>{
     e.preventDefault();
     createTask();
-    
 } )
 
 
@@ -54,8 +53,17 @@ async function getTasks(){
 
 
 
-async function updateTask(id, task){
+async function updateTask(id, updatedTask) {
+    let response = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: 'PUT', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedTask)
+    });
 
+    const responseData = await response.json();
+    console.log('Actualizado', responseData);
 }
 
 
@@ -92,7 +100,27 @@ async function showTasks() {
             <button class="btnOk"><ion-icon name="checkmark-outline"></ion-icon></button>
         `;
 
-        
+        const editButton = listItem.querySelector('.edit');
+        editButton.addEventListener('click', () => {
+            const taskTitle = listItem.querySelector('.task-title');
+            const description = listItem.querySelector('.description');
+            
+            if (taskTitle.contentEditable !== 'true') {
+                taskTitle.contentEditable = 'true';
+                description.contentEditable = 'true';
+                taskTitle.focus();
+                editButton.innerHTML = '<ion-icon name="save-outline"></ion-icon>';
+            } else {
+                taskTitle.contentEditable = 'false';
+                description.contentEditable = 'false';
+                editButton.innerHTML = '<ion-icon name="create-outline"></ion-icon>';
+                const updatedTask = {
+                    title: taskTitle.textContent,
+                    description: description.textContent
+                };
+                updateTask(task.id, updatedTask);
+            }
+        });
 
         listItem.querySelector('.task-title').addEventListener('click', () => {
             const description = listItem.querySelector('.description');

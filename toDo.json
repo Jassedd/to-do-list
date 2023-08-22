@@ -1,13 +1,13 @@
 {
   "tasks": [
     {
-      "title": "Caminar",
-      "description": "8.000 pasos",
+      "title": "Dormir",
+      "description": "1h",
       "id": 1
     },
     {
-      "title": "Jugar",
-      "description": "xConsola",
+      "title": "Comer",
+      "description": "Merienda",
       "id": 2
     }
   ]
