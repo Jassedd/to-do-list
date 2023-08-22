@@ -26,8 +26,6 @@ async function createTask() {
 
 
 
-
-
     async function  PostTask(taskInfo){
         let response = await fetch('http://localhost:3000/tasks', 
         {method: 'POST', 
@@ -88,7 +86,7 @@ let taskList = document.querySelector('.li-container');
 
 async function showTasks() {
     let tasks = await getTasks();
-    taskList.innerHTML = ''; // Limpiamos el contenido actual
+    taskList.innerHTML = '';
 
     tasks.forEach(task => {
         const listItem = document.createElement('li');

@@ -1,14 +1,14 @@
 {
   "tasks": [
     {
-      "title": "Dormir",
-      "description": "1h",
+      "title": "Trotar",
+      "description": "10min",
       "id": 1
     },
     {
-      "title": "Comer",
-      "description": "Merienda",
-      "id": 2
+      "title": "Comprar",
+      "description": "un mercado",
+      "id": 3
     }
   ]
 }
