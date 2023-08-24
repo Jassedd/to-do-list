@@ -1,5 +1,6 @@
 const taskInput = document.querySelector('.task-input')
 const descriptionInput = document.querySelector('.description-input')
+const taskDate = document.querySelector('.task-date')
 const btnAdd = document.querySelector('.btn-add').addEventListener("click", async e =>{
     e.preventDefault();
     createTask();
@@ -10,16 +11,18 @@ async function createTask() {
 
     let titleInput = taskInput.value;
     let description = descriptionInput.value;
+    let date = taskDate.value
 
     class tareas{
-        constructor(titleImput, description){
+        constructor(titleImput, description, taskDate){
         this.title = titleImput;
         this.description = description;
         this.completed = false
+        this.date = taskDate
         }
     }
 
-    const taskInfo = new tareas( titleInput, description)
+    const taskInfo = new tareas( titleInput, description, date)
 
     await PostTask(taskInfo)
 
@@ -97,8 +100,23 @@ async function showTasks() {
             <button class= "edit"><ion-icon name="create-outline"></ion-icon></button>
             <button class="btnDelete" onClick="deleteTask(${task.id})"><ion-icon name="trash-outline"></ion-icon></button>
             <button class="btnOk ${task.completed ? 'completed': ''}"><ion-icon name="checkmark-outline"></ion-icon></button>
+            <span class="task-date" style="display: none;">${task.date}</span>
+            <button class="btn-date ${task.date}"><ion-icon name="calendar-outline"></ion-icon></button>
         `;
 
+
+        
+        const date = listItem.querySelector('.task-date');
+
+        listItem.querySelector('.btn-date').addEventListener('click', () => {
+            if (date.style.display === 'none') {
+                date.style.display = 'block';
+            } else {
+                date.style.display = 'none';
+            }
+        });
+        
+        
         const editButton = listItem.querySelector('.edit');
         editButton.addEventListener('click', () => {
             const taskTitle = listItem.querySelector('.task-title');
@@ -121,6 +139,9 @@ async function showTasks() {
                 updateTask(task.id, updatedTask);
             }
         });
+
+
+
 
         listItem.querySelector('.task-title').addEventListener('click', () => {
             const description = listItem.querySelector('.description');

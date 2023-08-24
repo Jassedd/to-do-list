@@ -1,28 +1,11 @@
 {
   "tasks": [
     {
-      "title": "Trotar",
-      "description": "10min",
-      "completed": true,
-      "id": 1
-    },
-    {
-      "title": "Comprar",
-      "description": "un mercado",
-      "completed": true,
-      "id": 3
-    },
-    {
-      "title": "Saltar",
-      "description": "20min",
-      "completed": true,
-      "id": 4
-    },
-    {
-      "title": "Comer",
-      "description": "",
+      "title": "Estudiar",
+      "description": "Código",
       "completed": false,
-      "id": 5
+      "date": "2023-08-25",
+      "id": 1
     }
   ]
 }
