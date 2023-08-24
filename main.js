@@ -15,6 +15,7 @@ async function createTask() {
         constructor(titleImput, description){
         this.title = titleImput;
         this.description = description;
+        this.completed = false
         }
     }
 
@@ -33,7 +34,7 @@ async function createTask() {
         'Content-Type': 'application/json'
         },
         body: JSON.stringify(taskInfo)
-        });
+    });
         const responseData = await response.json()
         console.log('Aceptado', responseData)
     }
@@ -91,11 +92,11 @@ async function showTasks() {
     tasks.forEach(task => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
-            <span class="task-title">${task.title}</span>
+            <span class="task-title ${task.completed ? 'completed' : ''}">${task.title}</span>
             <div class="description" style="display: none;">${task.description}</div>
             <button class= "edit"><ion-icon name="create-outline"></ion-icon></button>
             <button class="btnDelete" onClick="deleteTask(${task.id})"><ion-icon name="trash-outline"></ion-icon></button>
-            <button class="btnOk"><ion-icon name="checkmark-outline"></ion-icon></button>
+            <button class="btnOk ${task.completed ? 'completed': ''}"><ion-icon name="checkmark-outline"></ion-icon></button>
         `;
 
         const editButton = listItem.querySelector('.edit');
@@ -114,7 +115,8 @@ async function showTasks() {
                 editButton.innerHTML = '<ion-icon name="create-outline"></ion-icon>';
                 const updatedTask = {
                     title: taskTitle.textContent,
-                    description: description.textContent
+                    description: description.textContent,
+                    completed: taskTitle.classList.contains('completed')
                 };
                 updateTask(task.id, updatedTask);
             }
@@ -133,6 +135,10 @@ async function showTasks() {
         btnOk.addEventListener('click', () => {
             const taskTitle = listItem.querySelector('.task-title');
             taskTitle.classList.toggle('completed'); 
+
+            const updatedTask ={
+                completed: taskTitle.classList.contains('completed')
+            }
         });
 
         taskList.appendChild(listItem);
