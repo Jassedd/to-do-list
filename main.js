@@ -102,10 +102,11 @@ async function showTasks() {
             <button class="btnOk ${task.completed ? 'completed': ''}"><ion-icon name="checkmark-outline"></ion-icon></button>
             <span class="task-date" style="display: none;">${task.date}</span>
             <button class="btn-date ${task.date}"><ion-icon name="calendar-outline"></ion-icon></button>
+            
         `;
 
+        listItem.classList.add('sortable-item')
 
-        
         const date = listItem.querySelector('.task-date');
 
         listItem.querySelector('.btn-date').addEventListener('click', () => {
@@ -118,6 +119,7 @@ async function showTasks() {
         
         
         const editButton = listItem.querySelector('.edit');
+        editButton.classList.add('sortable-handle'); // Agrega la clase "sortable-handle" al botón de editar
         editButton.addEventListener('click', () => {
             const taskTitle = listItem.querySelector('.task-title');
             const description = listItem.querySelector('.description');
@@ -170,6 +172,14 @@ async function showTasks() {
         emptyMessage.textContent = 'Sin tareas pendientes';
         taskList.appendChild(emptyMessage);
     }
+
+    new Sortable(taskList, {
+        animation: 150, // Duración de la animación de arrastrar y soltar
+        handle: '.sortable-handle', // Selector de elementos que permiten arrastrar (puedes agregar un ícono de arrastrar aquí)
+        ghostClass: 'sortable-ghost', // Clase aplicada al elemento fantasma mientras se arrastra
+        chosenClass: 'sortable-chosen', // Clase aplicada al elemento elegido para arrastrar
+        dragClass: 'sortable-drag' // Clase aplicada al elemento que está siendo arrastrado
+    });
 }
 
 document.addEventListener("DOMContentLoaded", showTasks);
